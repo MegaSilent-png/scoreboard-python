@@ -26,12 +26,47 @@ def genDir():
 		if not exists(filePath):
 			with open(filePath, "w") as f:
 				pass
+		
+def retrieveData():
+	global tLabel, p1, p1Scr, p2, p2Scr
+
+	global tLabel, p1, p1Scr, p2, p2Scr
+
+	with open(PATH + "label.txt", "r") as f:
+		val = f.readline()
+	tLabel.insert(0, val)
+	
+	with open(PATH + "P1.txt", "r") as f:
+		val = f.readline()
+	p1.insert(0, val)
+
+	with open(PATH + "scrP1.txt", "r") as f:
+		val = f.readline()
+		if not val:
+			val = "0"
+	p1Scr.insert(0, val)
+
+	with open(PATH + "P2.txt", "r") as f:
+		val = f.readline()
+	p2.insert(0, val)
+
+	with open(PATH + "scrP2.txt", "r") as f:
+		val = f.readline()
+		if not val:
+			val = "0"
+	p2Scr.insert(0, val)
 
 def callback(P):
 	return str.isdigit(P) or P == ""
 
 def switchPlayers():
-	pass
+	global p1, p2
+	val = str(p1.get())
+	p1.delete(0, tk.END)
+	p1.insert(0, p2.get())
+	p2.delete(0, tk.END)
+	p2.insert(0, val)
+
 
 def writeScore():
 	global tLabel, p1, p1Scr, p2, p2Scr
@@ -105,5 +140,6 @@ switchButton = tk.Button(root,
 switchButton.pack(side="bottom", padx=20, pady=20)
 
 genDir()
+retrieveData()
 
 root.mainloop()
