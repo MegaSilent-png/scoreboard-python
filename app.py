@@ -1,14 +1,17 @@
-# Project is still not finished
+# Project basically finished
 
 from os.path import exists
 import os
 import tkinter as tk
 
 # Score Board Records
+# This is the directory names
 dir_name = "SBR"
-fileNames = ["label", "P1", "scrP1", "P2", "scrP2"]
+
+# Path to the SBR directory
 PATH = "./" +  dir_name + "/"
 
+# Generate directory if it does not exist.
 def genDir():
 
 	try:
@@ -21,12 +24,17 @@ def genDir():
 	except Exception as e:
 		print(f"Error occured: {e}")
 
+	# File names
+	fileNames = ["label", "P1", "scrP1", "P2", "scrP2"]
+
+	# Generate files
 	for file in fileNames:
 		filePath = PATH + file + ".txt"
 		if not exists(filePath):
 			with open(filePath, "w") as f:
 				pass
 		
+# Retrieve the data from files and added to the text inputs
 def retrieveData():
 	global tLabel, p1, p1Scr, p2, p2Scr
 
@@ -56,9 +64,11 @@ def retrieveData():
 			val = "0"
 	p2Scr.insert(0, val)
 
-def callback(P):
+# Check if value is a number
+def isNumber(P):
 	return str.isdigit(P) or P == ""
 
+# Switch player position in scoreboard
 def switchPlayers():
 	global p1, p2
 	val = str(p1.get())
@@ -67,6 +77,7 @@ def switchPlayers():
 	p2.delete(0, tk.END)
 	p2.insert(0, val)
 
+# Clear all of the content in each text input
 def clearContent():
 	global tLabel, p1, p1Scr, p2, p2Scr
 	tLabel.delete(0, tk.END)
@@ -75,6 +86,7 @@ def clearContent():
 	p2.delete(0, tk.END)
 	p2Scr.delete(0, tk.END)
 
+# Submit the scores into there respective text files
 def writeScore():
 	global tLabel, p1, p1Scr, p2, p2Scr
 
@@ -85,7 +97,7 @@ def writeScore():
 		f.write(str(p1.get()))
 
 	p1S = p1Scr.get()
-	if callback(p1S):
+	if isNumber(p1S):
 		with open(PATH + "scrP1.txt", "w") as f:
 			f.write(str(p1S))
 
@@ -93,15 +105,18 @@ def writeScore():
 		f.write(str(p2.get()))
 
 	p2S = p2Scr.get()
-	if callback(p2S):
+	if isNumber(p2S):
 		with open(PATH + "scrP2.txt", "w") as f:
 			f.write(str(p2S))
 
+# Initiate window
 root = tk.Tk()
 root.title("Score Board Editor")
 height = 400
 width = 600
 root.geometry(str(width) + "x" + str(height))
+
+# Initiate each text input
 
 tLabelL = tk.Label(root, text = "Label")
 tLabelL.pack()
@@ -122,6 +137,8 @@ p2.pack()
 p2Scr = tk.Entry(root, width=2)
 p2Scr.pack()
 
+# Initiate switch button
+
 switchButton = tk.Button(root,
 				   text="Switch Players",
 				   command=switchPlayers,
@@ -132,6 +149,8 @@ switchButton = tk.Button(root,
 				   wraplength=100)
 
 switchButton.pack(side="left", padx=20, pady=20)
+
+# Initiate clear button
 
 clearButton = tk.Button(root,
 				   text="Clear",
@@ -144,8 +163,7 @@ clearButton = tk.Button(root,
 
 clearButton.pack(side="left", padx=20, pady=20)
 
-#bottom = tk.Frame(root)
-#bottom.pack(side="bottom", fill="both", expand=True)
+# Initiate exit button
 
 exitButton = tk.Button(root,
 				   text="Exit",
@@ -157,6 +175,8 @@ exitButton = tk.Button(root,
 				   wraplength=100)
 
 exitButton.pack(side="right", padx=20, pady=20)
+
+# Initiate submit button
 
 submitButton = tk.Button(root,
 				   text="Submit",
