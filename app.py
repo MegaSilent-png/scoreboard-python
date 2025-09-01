@@ -38,8 +38,6 @@ def genDir():
 def retrieveData():
 	global tLabel, p1, p1Scr, p2, p2Scr
 
-	global tLabel, p1, p1Scr, p2, p2Scr
-
 	with open(PATH + "label.txt", "r") as f:
 		val = f.readline()
 	tLabel.insert(0, val)
