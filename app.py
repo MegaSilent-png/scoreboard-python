@@ -67,6 +67,13 @@ def switchPlayers():
 	p2.delete(0, tk.END)
 	p2.insert(0, val)
 
+def clearContent():
+	global tLabel, p1, p1Scr, p2, p2Scr
+	tLabel.delete(0, tk.END)
+	p1.delete(0, tk.END)
+	p1Scr.delete(0, tk.END)
+	p2.delete(0, tk.END)
+	p2Scr.delete(0, tk.END)
 
 def writeScore():
 	global tLabel, p1, p1Scr, p2, p2Scr
@@ -115,7 +122,41 @@ p2.pack()
 p2Scr = tk.Entry(root, width=2)
 p2Scr.pack()
 
+switchButton = tk.Button(root,
+				   text="Switch Players",
+				   command=switchPlayers,
+				   height=1,
+				   padx=10,
+				   pady=5,
+				   width=15,
+				   wraplength=100)
 
+switchButton.pack(side="left", padx=20, pady=20)
+
+clearButton = tk.Button(root,
+				   text="Clear",
+				   command=clearContent,
+				   height=1,
+				   padx=10,
+				   pady=3,
+				   width=5,
+				   wraplength=100)
+
+clearButton.pack(side="left", padx=20, pady=20)
+
+#bottom = tk.Frame(root)
+#bottom.pack(side="bottom", fill="both", expand=True)
+
+exitButton = tk.Button(root,
+				   text="Exit",
+				   command=root.quit,
+				   height=1,
+				   padx=10,
+				   pady=5,
+				   width=5,
+				   wraplength=100)
+
+exitButton.pack(side="right", padx=20, pady=20)
 
 submitButton = tk.Button(root,
 				   text="Submit",
@@ -126,18 +167,9 @@ submitButton = tk.Button(root,
 				   width=5,
 				   wraplength=100)
 
-submitButton.pack(side="bottom", padx=20, pady=20)
+submitButton.pack(side="right", padx=20, pady=20)
 
-switchButton = tk.Button(root,
-				   text="Switch Players",
-				   command=switchPlayers,
-				   height=1,
-				   padx=10,
-				   pady=5,
-				   width=15,
-				   wraplength=100)
 
-switchButton.pack(side="bottom", padx=20, pady=20)
 
 genDir()
 retrieveData()
