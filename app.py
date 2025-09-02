@@ -80,9 +80,14 @@ def clearContent():
 	global tLabel, p1, p1Scr, p2, p2Scr
 	tLabel.delete(0, tk.END)
 	p1.delete(0, tk.END)
-	p1Scr.delete(0, tk.END)
 	p2.delete(0, tk.END)
+	p1Scr.delete(0, tk.END)
 	p2Scr.delete(0, tk.END)
+
+	# Add 0 as it is the default value
+	p1Scr.insert(0, '0')
+	p2Scr.insert(0, '0')
+
 
 # Submit the scores into there respective text files
 def writeScore():
